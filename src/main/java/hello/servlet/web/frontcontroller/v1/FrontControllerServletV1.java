@@ -16,15 +16,15 @@ import java.util.Map;
 @WebServlet(name = "frontControllerServletV1", urlPatterns = "/front-controller/v1/*")
 public class FrontControllerServletV1 extends HttpServlet {
 
-    // mapping정보
-    private Map<String, ControllerV1> controllerMap = new HashMap<String, ControllerV1>();
-
+    // mapping 정보
+    private Map<String, ControllerV1> controllerMap = new HashMap<>();
+    
     public FrontControllerServletV1() {
         controllerMap.put("/front-controller/v1/members/new-form", new MemberFormControllerV1());
         controllerMap.put("/front-controller/v1/members/save", new MemberSaveControllerV1());
         controllerMap.put("/front-controller/v1/members", new MemberListControllerV1());
     }
-
+    
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -39,8 +39,6 @@ public class FrontControllerServletV1 extends HttpServlet {
         }
 
         controller.process(request, response);
-
-
 
     }
 }
