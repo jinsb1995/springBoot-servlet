@@ -9,5 +9,6 @@ import java.io.IOException;
 
 public interface ControllerV2 {
 
+    // v1은 void였는데 이건 viewPath를 반환하도록
     MyView process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 }

@@ -17,7 +17,6 @@ import java.util.Map;
 @WebServlet(name = "frontControllerServletV2", urlPatterns = "/front-controller/v2/*")
 public class FrontControllerServletV2 extends HttpServlet {
 
-    // mapping 정보
     private final Map<String, ControllerV2> controllerMap = new HashMap<>();
 
     public FrontControllerServletV2() {
@@ -25,23 +24,22 @@ public class FrontControllerServletV2 extends HttpServlet {
         controllerMap.put("/front-controller/v2/members/save", new MemberSaveControllerV2());
         controllerMap.put("/front-controller/v2/members", new MemberListControllerV2());
     }
-    
+
+
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String requestURI = request.getRequestURI();   // 주소를 받아준다.
-
+        String requestURI = request.getRequestURI();
         ControllerV2 controller = controllerMap.get(requestURI);
-        System.out.println("requestURI = " + requestURI);
-
         if(controller == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);  // 404
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
-        // new MyView("/WEB-INF/views/new-form.jsp");
         MyView view = controller.process(request, response);
         view.render(request, response);
+
+
 
     }
 }
