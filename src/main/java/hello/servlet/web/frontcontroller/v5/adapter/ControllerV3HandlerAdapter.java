@@ -12,53 +12,35 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ControllerV3HandlerAdapter implements MyHandlerAdapter {
+
+
     @Override
-    public boolean supports(Object handler) {
+    public boolean support(Object handler) {
+        // handler가 V3의 인스턴스냐 물어보는것임
+        // MemberFormControllerV3
         return (handler instanceof ControllerV3);
     }
 
     @Override
     public ModelView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException {
-
+        // 어댑터의 역할이 컨트롤러를 호출 해주고
+        // MemberFormControllerV3
         ControllerV3 controller = (ControllerV3) handler;
 
+        // 반환을 해주는데 반환 타입에 맞추어서 반환을 해줘야한다.
         Map<String, String> paramMap = createParamMap(request);
         ModelView mv = controller.process(paramMap);
 
         return mv;
     }
 
+
     private Map<String, String> createParamMap(HttpServletRequest request) {
-        Map<String, String> paramMap = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         request.getParameterNames().asIterator()
-                .forEachRemaining(paramName -> paramMap.put(paramName, request.getParameter(paramName)));
-        return paramMap;
+                .forEachRemaining(paramName -> map.put(paramName, request.getParameter(paramName)));
+        return map;
     }
 
 
-//    @Override
-//    public boolean supports(Object handler) {
-//        // 여기에 들어온 handler가 v3랑 맞으면 true, v1~v2, v4가 들어오면 false
-//        return (handler instanceof ControllerV3);
-//    }
-//
-//    @Override
-//    public ModelView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException {
-//        // 위에있는 supports가 v3라는걸 증명서 true를 반환해주면 여기 들어오게 될 건 v3이기 때문에 형변환을 해줘도 된다.
-//        ControllerV3 controller = (ControllerV3) handler;
-//
-//        // 한 다음 여기서 뷰를 반환해야지
-//        Map<String, String> paramMap = createParamMap(request);
-//
-//        ModelView mv = controller.process(paramMap);
-//
-//        return mv;
-//    }
-//
-//    private Map<String, String> createParamMap(HttpServletRequest request) {
-//        Map<String, String> paramMap = new HashMap<>();
-//        request.getParameterNames().asIterator()
-//                .forEachRemaining(paramName -> paramMap.put(paramName, request.getParameter(paramName)));
-//        return paramMap;
-//    }
 }
