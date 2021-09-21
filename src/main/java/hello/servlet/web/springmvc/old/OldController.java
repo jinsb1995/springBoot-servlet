@@ -26,6 +26,7 @@ public class OldController implements Controller {
 
         System.out.println("OldController ================  OldController.handleRequest");
 
-        return null;
+        // InternalResourceViewResolver
+        return new ModelAndView("new-form");
     }
 }
