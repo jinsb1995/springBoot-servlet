@@ -20,7 +20,6 @@ public class OldController implements Controller {
     // 핸들러 매핑을 통해서 찾은 핸들러를 실행할 수 있는 핸들러 어댑터가 필요하다.
     // Controller 인터페이스를 실행할 수 있는 핸들러 어댑터를 찾고 실행해야 한다.  ex) SimpleControllerHandlerAdapter
 
-
     @Override
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
